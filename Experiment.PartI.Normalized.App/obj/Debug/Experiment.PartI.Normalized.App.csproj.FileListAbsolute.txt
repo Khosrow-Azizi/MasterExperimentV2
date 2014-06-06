@@ -1,0 +1,14 @@
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\Experiment.PartI.Normalized.App.exe.config
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\Experiment.PartI.Normalized.App.exe
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\Experiment.PartI.Normalized.App.pdb
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\EntityFramework.dll
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\MongoDB.Bson.dll
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\MongoDB.Driver.dll
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\MongoDB.Bson.pdb
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\MongoDB.Bson.xml
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\MongoDB.Driver.pdb
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\MongoDB.Driver.xml
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\bin\Debug\EntityFramework.xml
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\obj\Debug\Experiment.PartI.Normalized.App.csprojResolveAssemblyReference.cache
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\obj\Debug\Experiment.PartI.Normalized.App.exe
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.App\obj\Debug\Experiment.PartI.Normalized.App.pdb
