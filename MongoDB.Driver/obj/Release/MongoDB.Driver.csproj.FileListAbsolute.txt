@@ -1,0 +1,9 @@
+C:\Users\khosrow azizi\workspace\MasterExperiment\MongoDB.Driver\bin\Release\MongoDB.Driver.XML
+C:\Users\khosrow azizi\workspace\MasterExperiment\MongoDB.Driver\bin\Release\MongoDB.Driver.dll
+C:\Users\khosrow azizi\workspace\MasterExperiment\MongoDB.Driver\bin\Release\MongoDB.Driver.pdb
+C:\Users\khosrow azizi\workspace\MasterExperiment\MongoDB.Driver\bin\Release\MongoDB.Bson.dll
+C:\Users\khosrow azizi\workspace\MasterExperiment\MongoDB.Driver\bin\Release\MongoDB.Bson.pdb
+C:\Users\khosrow azizi\workspace\MasterExperiment\MongoDB.Driver\bin\Release\MongoDB.Bson.xml
+C:\Users\khosrow azizi\workspace\MasterExperiment\MongoDB.Driver\obj\Release\MongoDB.Driver.csprojResolveAssemblyReference.cache
+C:\Users\khosrow azizi\workspace\MasterExperiment\MongoDB.Driver\obj\Release\MongoDB.Driver.dll
+C:\Users\khosrow azizi\workspace\MasterExperiment\MongoDB.Driver\obj\Release\MongoDB.Driver.pdb
