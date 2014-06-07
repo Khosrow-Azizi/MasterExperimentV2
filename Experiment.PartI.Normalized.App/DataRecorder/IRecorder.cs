@@ -11,6 +11,7 @@ namespace Experiment.PartI.Normalized.App.DataRecorder
    public interface IRecorder
    {
       void Record(PerformanceResult performanceResult);
+      void Record(IEnumerable<PerformanceResult> performanceResults);
       void Delete(PartIResult partIResult);
       PartIResult GetLatestResult(TestCaseEnums testCase, TestScenarioEnums scenario);
       void DeleteAllResults();

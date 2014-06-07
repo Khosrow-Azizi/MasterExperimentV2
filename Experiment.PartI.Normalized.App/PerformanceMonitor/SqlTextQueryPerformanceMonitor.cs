@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Experiment.PartI.Normalized.App
+namespace Experiment.PartI.Normalized.App.PerformanceMonitor
 {
-   class Program
+   class SqlTextQueryPerformanceMonitor
    {
-      static void Main(string[] args)
-      {
-      }
    }
 }

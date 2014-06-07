@@ -25,7 +25,7 @@ namespace Experiment.PartI.Normalized.App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool RunLocal {
             get {
                 return ((bool)(this["RunLocal"]));
@@ -85,23 +85,28 @@ namespace Experiment.PartI.Normalized.App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=MasterExperimentPartI;Persist Security Info" +
-            "=False; Integrated Security=true;")]
-        public string LocalResultDbConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string LocalResultDataSource {
             get {
-                return ((string)(this["LocalResultDbConnectionString"]));
+                return ((string)(this["LocalResultDataSource"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=MasterExperimentPartI;Persist Security Info" +
-            "=False; Integrated Security=true;")]
-        public string RemoteResultDbConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string RemoteResultDataSource {
             get {
-                return ((string)(this["RemoteResultDbConnectionString"]));
+                return ((string)(this["RemoteResultDataSource"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MasterExperimentResultV2")]
+        public string ResultDatabaseName {
+            get {
+                return ((string)(this["ResultDatabaseName"]));
             }
         }
     }

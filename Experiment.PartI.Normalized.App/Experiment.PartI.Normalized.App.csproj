@@ -81,7 +81,11 @@
     </Compile>
     <Compile Include="DataRecorder\IRecorder.cs" />
     <Compile Include="DataRecorder\Recorder.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="PerformanceMonitor\IDatabasePerformanceMonitor.cs" />
+    <Compile Include="PerformanceMonitor\MongoPerformanceMonitor.cs" />
+    <Compile Include="PerformanceMonitor\SqlCommandQueryPerformanceMonitor.cs" />
+    <Compile Include="PerformanceMonitor\SqlTextQueryPerformanceMonitor.cs" />
+    <Compile Include="ExperimentRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -91,6 +95,7 @@
     <Compile Include="Shared\Configuration.cs" />
     <Compile Include="Shared\Enums.cs" />
     <Compile Include="Shared\PerformanceResult.cs" />
+    <Compile Include="Shared\RunConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -117,9 +122,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PerformanceMonitor\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

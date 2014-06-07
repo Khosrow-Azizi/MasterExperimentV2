@@ -1,9 +1,9 @@
 ﻿
 public enum DataBaseTypeEnums
-{
-   SqlServerByTextQuery = 1,
-   SqlServerByCommandQuery = 2,
-   MongoDbNormalizedWriteAck = 3,
+{  
+   SqlServerWithCommandQuery = 1,
+   MongoDbNormalizedWriteAck = 2,
+   SqlServerWithTextQuery = 3,
    MongoDbNormalizedWriteUnack = 4,
    MongoDbDenormalizedWriteAck = 5,
    MongoDbDenormalizedWriteUnack = 6,
@@ -37,4 +37,13 @@ public enum TestScenarioEnums
    SelectDepartmentByRandomUserFirstName = 11,
    SelectUsersByRandomProjectKeys = 12,
    SelectAverageAgeByRandomProjectKeys = 13,
+}
+
+public enum RandomDataTypeEnums
+{
+   DepartmentId = 1,
+   UserId = 2,
+   ProjectId = 3,
+   UserFirstName = 4,
+   DepartmentName = 5,
 }

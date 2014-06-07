@@ -18,6 +18,6 @@ namespace Experiment.PartI.Normalized.App.DatabaseManager
       string GetRandomName<T>() where T : PartIBaseClass, IHasName;
       string GetRandomUserFirstName();
       string GetLatestName<T>() where T : PartIBaseClass, IHasName;
-      void FlushDatabase();
+      void DeleteAll();
    }
 }

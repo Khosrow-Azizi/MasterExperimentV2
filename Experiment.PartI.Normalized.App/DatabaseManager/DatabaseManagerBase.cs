@@ -18,7 +18,7 @@ namespace Experiment.PartI.Normalized.App.DatabaseManager
       public abstract string GetRandomUserFirstName();
       public abstract int GetNewId<T>() where T : PartIBaseClass;
       public abstract string GetLatestName<T>() where T : PartIBaseClass, IHasName;
-      public abstract void FlushDatabase();
+      public abstract void DeleteAll();
       public virtual long ConvertToCount<T>(float portion) where T : PartIBaseClass
       {
          long count = GetTotalCount<T>();

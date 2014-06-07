@@ -13,6 +13,12 @@ namespace Experiment.PartI.Normalized.App.DatabaseManager
 {
    public class MongoDatabaseManager : DatabaseManagerBase
    {
+      public MongoDatabaseManager(string connectionString, string databaseName)
+      {
+         this.connectionString = connectionString;
+         this.databaseName = databaseName;
+      }
+
       public override Dictionary<int, string> GetKeyAndNames<T>(float portion)
       {
          return GetCollection<T>().FindAll()
@@ -72,13 +78,6 @@ namespace Experiment.PartI.Normalized.App.DatabaseManager
          return entity == null ? string.Empty : entity.Name;
       }
 
-      private MongoCollection<T> GetCollection<T>() where T : PartIRootClass
-      {
-         MongoServer server = new MongoClient(Configuration.MongoConnectionString).GetServer();
-         MongoDatabase database = server.GetDatabase(Configuration.DatabaseName);
-         return database.GetCollection<T>(typeof(T).Name);
-      }
-
       public override void RestoreDatabase<T>(Dictionary<int, string> keyAndNames)
       {
          var collection = GetCollection<T>();
@@ -90,7 +89,7 @@ namespace Experiment.PartI.Normalized.App.DatabaseManager
          }
       }
 
-      public override void FlushDatabase()
+      public override void DeleteAll()
       {
          GetCollection<Project>().Drop();
          GetCollection<User>().Drop();
@@ -101,5 +100,15 @@ namespace Experiment.PartI.Normalized.App.DatabaseManager
       {
          return GetCollection<T>().FindAll().Select(e => e.Id).ToArray();
       }
+
+      private MongoCollection<T> GetCollection<T>() where T : PartIRootClass
+      {
+         MongoServer server = new MongoClient(connectionString).GetServer();
+         MongoDatabase database = server.GetDatabase(databaseName);
+         return database.GetCollection<T>(typeof(T).Name);
+      }
+
+      private readonly string connectionString;
+      private readonly string databaseName;
    }
 }

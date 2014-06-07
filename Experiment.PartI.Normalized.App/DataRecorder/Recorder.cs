@@ -33,6 +33,28 @@ namespace Experiment.PartI.Normalized.App.DataRecorder
          }
       }
 
+      public void Record(IEnumerable<PerformanceResult> performanceResults)
+      {
+         using (var ctx = new Entities())
+         {
+            int testNumber = GenerateNewTestNumber(ctx, performanceResults.First());
+            foreach (var result in performanceResults)
+            {
+               ctx.PartIResult.Add(new PartIResult
+               {
+                  TestNumber = testNumber,
+                  DataBaseType = (int)dataBaseType,
+                  DateTimeAdded = DateTime.Now,
+                  TestCase = (int)result.TestCase,
+                  TestScenario = (int)result.TestScenario,
+                  ExecutionTime = result.ExecutionTime,
+               });
+               testNumber++;
+            }
+            ctx.SaveChanges();
+         }
+      }
+
       public PartIResult GetLatestResult(TestCaseEnums testCase, TestScenarioEnums scenario)
       {
          using (Entities ctx = new Entities())

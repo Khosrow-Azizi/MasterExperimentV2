@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.EntityClient;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,13 +39,40 @@ namespace Experiment.PartI.Normalized.App.Shared
          }
       }
 
+      public static string ResultDbEFConnectionString
+      {
+         get
+         {
+            return new EntityConnectionStringBuilder
+            {
+               Metadata = "res://*",
+               Provider = "System.Data.SqlClient",
+               ProviderConnectionString = new SqlConnectionStringBuilder
+               {
+                  InitialCatalog = Settings.Default.ResultDatabaseName,
+                  DataSource = Settings.Default.RunLocal ?
+                  @Settings.Default.LocalResultDataSource :
+                  @Settings.Default.RemoteResultDataSource,
+                  IntegratedSecurity = true,
+                  PersistSecurityInfo = false,
+               }.ConnectionString
+            }.ConnectionString;
+         }
+      }
+
       public static string ResultDbSqlConnectionString
       {
          get
          {
-            return Settings.Default.RunLocal ?
-                @Settings.Default.LocalResultDbConnectionString :
-                @Settings.Default.RemoteResultDbConnectionString;
+            return new SqlConnectionStringBuilder
+              {
+                 InitialCatalog = Settings.Default.ResultDatabaseName,
+                 DataSource = Settings.Default.RunLocal ?
+                 @Settings.Default.LocalResultDataSource :
+                 @Settings.Default.RemoteResultDataSource,
+                 IntegratedSecurity = true,
+                 PersistSecurityInfo = false,
+              }.ConnectionString;
          }
       }
    }
