@@ -226,24 +226,9 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
 
                var initialTime = stopwatch.Elapsed.TotalMilliseconds;
                stopwatch.Start();
-               using (SqlDataReader rdr = command.ExecuteReader())
-               {
-                  if (rdr.HasRows)
-                  {
-                     while (rdr.Read())
-                     {
-                        Department department = new Department
-                        {
-                           Id = rdr.GetInt32(0),
-                           Name = rdr.GetString(1),
-                           DateAdded = rdr.GetDateTime(2),
-                        };
-                     }
-                  }
-                  stopwatch.Stop();
-                  execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
-                  rdr.Close();
-               }
+               command.ExecuteNonQuery();
+               stopwatch.Stop();
+               execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
             }
             sqlConnection.Close();
          }
@@ -481,7 +466,6 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          if (!projectKeys.Any())
             throw new ArgumentException("ProjectKeys array should contain at least one item.");
          double execTime;
-         double averageAge = 0;
          StringBuilder sb = new StringBuilder();
          using (SqlConnection sqlConnection = new SqlConnection(connectionString))
          {
@@ -513,7 +497,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                   {
                      while (rdr.Read())
                      {
-                        averageAge = rdr.GetDouble(0);
+                        var averageAge = rdr[0];
                      }
                   }
                   stopwatch.Stop();

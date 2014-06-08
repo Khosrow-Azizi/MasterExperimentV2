@@ -84,7 +84,6 @@
     <Compile Include="PerformanceMonitor\IDatabasePerformanceMonitor.cs" />
     <Compile Include="PerformanceMonitor\MongoPerformanceMonitor.cs" />
     <Compile Include="PerformanceMonitor\SqlCommandQueryPerformanceMonitor.cs" />
-    <Compile Include="PerformanceMonitor\SqlTextQueryPerformanceMonitor.cs" />
     <Compile Include="ExperimentRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

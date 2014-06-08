@@ -19,6 +19,11 @@ namespace Experiment.PartI.Normalized.App
    {
       public static void Main(string[] args)
       {
+         Process proc = Process.GetCurrentProcess();
+         ProcessThread thread = proc.Threads[0];
+         thread.IdealProcessor = 1;
+         thread.ProcessorAffinity = (IntPtr)2;
+
          ExperimentRunner expRunner = null;
          bool waitForUser = true;        
          while (waitForUser)
@@ -57,7 +62,7 @@ namespace Experiment.PartI.Normalized.App
          if (expRunner != null)
             expRunner.RunAll();
 
-         Console.Write("Stopping the program...");
+         Console.Write("\nStopping the program...");
          int count = 4;
          while (count > 0)
          {
@@ -100,6 +105,7 @@ namespace Experiment.PartI.Normalized.App
          Console.WriteLine(string.Format("Running the experiment with database type '{0}'..", databaseType.ToString()));
          if (!FlushDatabases())
             return;
+         
          Run(TestCaseEnums.TestCase1);
          //Run(TestCaseEnums.TestCase2);
          //Run(TestCaseEnums.TestCase3);
@@ -122,80 +128,77 @@ namespace Experiment.PartI.Normalized.App
          if (!RunInserts(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
-
-         stopwatch.Reset();
+         Console.WriteLine("Average InsertDepartment execution time: " + 
+            results.Where(r => r.TestScenario == TestScenarioEnums.InsertDepartment).Average(rs => rs.ExecutionTime) + " ms");
+         Console.WriteLine("Average InsertUser execution time: " +
+            results.Where(r => r.TestScenario == TestScenarioEnums.InsertUser).Average(rs => rs.ExecutionTime) + " ms");
+         Console.WriteLine("Average InsertProject execution time: " +
+             results.Where(r => r.TestScenario == TestScenarioEnums.InsertProject).Average(rs => rs.ExecutionTime) + " ms");
+        
          results.Clear();
          if (!RunUpdateDepartmentName(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
 
-         stopwatch.Reset();
          results.Clear();
          if (!RunUpdateUserLastName(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
 
-         stopwatch.Reset();
          results.Clear();
          if (!RunUpdateProjectName(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
 
-         stopwatch.Reset();
          results.Clear();
          if (!RunSelectDepartmentByKey(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
-
-         stopwatch.Reset();
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
+        
          results.Clear();
          if (!RunSelectDepartmentByRandomName(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
-
-         stopwatch.Reset();
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
+         
          results.Clear();
          if (!RunSelectUserByKey(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
-
-         stopwatch.Reset();
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
+        
          results.Clear();
          if (!RunSelectUserByRandomFirstName(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
-
-         stopwatch.Reset();
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
+        
          results.Clear();
          if (!RunSelectDepartmentByRandomUser(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
-
-         stopwatch.Reset();
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
+       
          results.Clear();
          if (!RunSelectUserByRandomProject(config, stopwatch, results))
             return;
          recorder.Record(results);
-         Thread.Sleep(300);
-
-         stopwatch.Reset();
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
+        
          results.Clear();
          if (!RunSelectAvgUserAgeByProjects(config, stopwatch, results))
             return;
          recorder.Record(results);
+         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
 
          results.Clear();
          stopwatch.Stop();
          Console.WriteLine(string.Format("Test case '{0}' successfully completed.", testCase.ToString()));
+         Console.WriteLine("--------------------------------------------------------------------------");
       }
 
       private bool RunInserts(RunConfiguration config, Stopwatch sw, List<PerformanceResult> resultsTobeRecorded)
@@ -602,7 +605,7 @@ namespace Experiment.PartI.Normalized.App
          }
          catch (Exception ex)
          {
-            Console.WriteLine("Failed to complete Select tests. Error: ", ex.Message);
+            Console.WriteLine("Failed to complete Select tests. Error: " + ex.Message);
             return false;
          }
          Console.WriteLine("Select test completed.");

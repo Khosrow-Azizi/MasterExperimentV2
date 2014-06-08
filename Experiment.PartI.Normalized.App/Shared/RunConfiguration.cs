@@ -26,7 +26,7 @@ namespace Experiment.PartI.Normalized.App.Shared
                {
                   NumberOfSelects = 100,
                   NumberOfUpdates = 100,
-                  TotalNumberOfDepartments = 100,// 4,
+                  TotalNumberOfDepartments = 4,
                   TotalNumberOfUsers = 128,
                   TotalNumberOfProjects = 16,
                   TestCase = testCase,
@@ -36,7 +36,7 @@ namespace Experiment.PartI.Normalized.App.Shared
                {
                   NumberOfSelects = 100,
                   NumberOfUpdates = 100,
-                  TotalNumberOfDepartments = 4,
+                  TotalNumberOfDepartments = 8,
                   TotalNumberOfUsers = 256,
                   TotalNumberOfProjects = 64,
                   TestCase = testCase,
