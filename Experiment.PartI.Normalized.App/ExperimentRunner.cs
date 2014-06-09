@@ -103,19 +103,21 @@ namespace Experiment.PartI.Normalized.App
       public void RunAll()
       {
          Console.WriteLine(string.Format("Running the experiment with database type '{0}'..", databaseType.ToString()));
+         Console.WriteLine("Start time: " + DateTime.Now);
          if (!FlushDatabases())
             return;
-         
+         Run(TestCaseEnums.Initialize);
          Run(TestCaseEnums.TestCase1);
-         //Run(TestCaseEnums.TestCase2);
-         //Run(TestCaseEnums.TestCase3);
-         //Run(TestCaseEnums.TestCase4);
-         //Run(TestCaseEnums.TestCase5);
-         //Run(TestCaseEnums.TestCase6);
-         //Run(TestCaseEnums.TestCase7);
-         //Run(TestCaseEnums.TestCase8);
+         Run(TestCaseEnums.TestCase2);
+         Run(TestCaseEnums.TestCase3);
+         Run(TestCaseEnums.TestCase4);
+         Run(TestCaseEnums.TestCase5);
+         Run(TestCaseEnums.TestCase6);
+         Run(TestCaseEnums.TestCase7);
+         Run(TestCaseEnums.TestCase8);
          SaveRandomData();
          Console.WriteLine("The experiment finished successfully.");
+         Console.WriteLine("End time: " + DateTime.Now);
       }
 
       public void Run(TestCaseEnums testCase)
@@ -127,78 +129,85 @@ namespace Experiment.PartI.Normalized.App
          results.Clear();
          if (!RunInserts(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average InsertDepartment execution time: " + 
-            results.Where(r => r.TestScenario == TestScenarioEnums.InsertDepartment).Average(rs => rs.ExecutionTime) + " ms");
-         Console.WriteLine("Average InsertUser execution time: " +
-            results.Where(r => r.TestScenario == TestScenarioEnums.InsertUser).Average(rs => rs.ExecutionTime) + " ms");
-         Console.WriteLine("Average InsertProject execution time: " +
-             results.Where(r => r.TestScenario == TestScenarioEnums.InsertProject).Average(rs => rs.ExecutionTime) + " ms");
-        
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded.");
+         Thread.Sleep(2000);
+         //results.Clear();
          if (!RunUpdateDepartmentName(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
-
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded.");
+         Thread.Sleep(2000);
+        // results.Clear();
          if (!RunUpdateUserLastName(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
-
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded.");
+         Thread.Sleep(2000);
+       //  results.Clear();
          if (!RunUpdateProjectName(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
-
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded.");
+         Thread.Sleep(2000);
+         //results.Clear();
          if (!RunSelectDepartmentByKey(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
-        
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded.");
+         Thread.Sleep(2000);
+         //results.Clear();
          if (!RunSelectDepartmentByRandomName(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
-         
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded."); 
+         Thread.Sleep(2000);
+         //results.Clear();
          if (!RunSelectUserByKey(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
-        
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded."); 
+         Thread.Sleep(2000);
+         //results.Clear();
          if (!RunSelectUserByRandomFirstName(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
-        
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded.");  
+         Thread.Sleep(2000);
+         //results.Clear();
          if (!RunSelectDepartmentByRandomUser(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
-       
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded."); 
+         Thread.Sleep(2000);
+         //results.Clear();
          if (!RunSelectUserByRandomProject(config, stopwatch, results))
             return;
-         recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
-        
-         results.Clear();
+         //Console.WriteLine("Saving result data in the database..");
+         //recorder.Record(results);
+         //Console.WriteLine("Saving result data succeeded."); 
+         Thread.Sleep(2000);
+         //results.Clear();
          if (!RunSelectAvgUserAgeByProjects(config, stopwatch, results))
             return;
+         Console.WriteLine("Saving result data in the database..");
          recorder.Record(results);
-         Console.WriteLine("Average execution time: " + results.Average(r => r.ExecutionTime) + " ms");  
+         Console.WriteLine("Saving result data succeeded.");
 
          results.Clear();
          stopwatch.Stop();
          Console.WriteLine(string.Format("Test case '{0}' successfully completed.", testCase.ToString()));
          Console.WriteLine("--------------------------------------------------------------------------");
+         Thread.Sleep(5000);
       }
 
       private bool RunInserts(RunConfiguration config, Stopwatch sw, List<PerformanceResult> resultsTobeRecorded)
@@ -217,6 +226,12 @@ namespace Experiment.PartI.Normalized.App
             dbCount = dbManager.GetTotalCount<Department>();
             numberOfInserts = config.TotalNumberOfDepartments - dbCount;
 
+            dbPerformanceMonitor.Insert(new Department
+               {
+                  Id = dbManager.GetNewId<Department>(),
+                  Name = DepartmentNamePrefix + (++namePostfix),
+                  DateAdded = DateTime.Now,
+               }, sw);
             for (int i = 0; i < numberOfInserts; i++)
             {
                Department department = new Department
@@ -225,7 +240,7 @@ namespace Experiment.PartI.Normalized.App
                   Name = DepartmentNamePrefix + (++namePostfix),
                   DateAdded = DateTime.Now,
                };
-
+               
                resultsTobeRecorded.Add(new PerformanceResult
                {
                   ExecutionTime = dbPerformanceMonitor.Insert(department, sw),

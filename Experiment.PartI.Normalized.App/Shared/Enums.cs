@@ -12,6 +12,7 @@ public enum DataBaseTypeEnums
 public enum TestCaseEnums
 {
    UnitTest = -1,
+   Initialize = 0,
    TestCase1 = 1,
    TestCase2 = 2,
    TestCase3 = 3,

@@ -33,34 +33,31 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
 
       public double Insert(Department department, Stopwatch stopwatch)
       {
-         var collection = GetCollection<Department>();
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         var collection = GetCollection<Department>();        
+         stopwatch.Restart();
          collection.Insert<Department>(department, insertOptions);
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
       public double Insert(Project project, Stopwatch stopwatch)
       {
          var collection = GetCollection<Project>();
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          collection.Insert<Project>(project, insertOptions);
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
       public double Insert(User user, Stopwatch stopwatch)
       {
          var collection = GetCollection<User>();
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          collection.Insert<User>(user, insertOptions);
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -70,11 +67,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          IMongoQuery query = Query<Department>.In(e => e.Id, keys);
          IMongoUpdate command = Update<Department>.Set(e => e.Name, newName);
 
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          collection.Update(query, command, updateOptions);
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -84,11 +80,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          IMongoQuery query = Query<Project>.In(e => e.Id, keys);
          IMongoUpdate command = Update<Project>.Set(e => e.Name, newName);
 
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          collection.Update(query, command, updateOptions);
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -98,11 +93,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          IMongoQuery query = Query<User>.EQ(e => e.FirstName, firstNamePattern);
          IMongoUpdate command = Update<User>.Set(e => e.LastName, newLastName);
 
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          collection.Update(query, command, updateOptions);
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -111,11 +105,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          var collection = GetCollection<Department>();
          IMongoQuery query = Query<Department>.EQ(e => e.Id, key);
 
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          Department department = collection.Find(query).FirstOrDefault();
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -124,11 +117,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          var collection = GetCollection<User>();
          IMongoQuery query = Query<User>.EQ(e => e.Id, key);
 
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          User user = collection.Find(query).FirstOrDefault();
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -137,11 +129,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          var collection = GetCollection<Department>();
          IMongoQuery query = Query<Department>.EQ(e => e.Name, name);
 
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          Department department = collection.Find(query).FirstOrDefault();
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -150,11 +141,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          var collection = GetCollection<User>();
          IMongoQuery query = Query<User>.EQ(e => e.FirstName, firstName);
 
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          IEnumerable<User> users = collection.Find(query).ToArray();
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -164,8 +154,8 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          var userCollection = GetCollection<User>();
 
          IMongoQuery userQuery = Query<User>.EQ(u => u.FirstName, userFirstName);
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+
+         stopwatch.Restart();
          var departmentIds = userCollection.Find(userQuery).Select(u => u.DepartmentId);
          stopwatch.Stop();
 
@@ -174,7 +164,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          IEnumerable<Department> departments = depCollection.Find(depQuery).ToArray();
          stopwatch.Stop();
 
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -184,8 +174,8 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          var projectCollection = GetCollection<Project>();
 
          IMongoQuery projectQuery = Query<Project>.In(p => p.Id, projectKeys);
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+
+         stopwatch.Restart();
          var projectUserIds = projectCollection.Find(projectQuery).SelectMany(p => p.Users);
          stopwatch.Stop();
 
@@ -194,7 +184,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          IEnumerable<User> users = userCollection.Find(userQuery).ToArray();
          stopwatch.Stop();
 
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 
@@ -204,8 +194,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
          var projectCollection = GetCollection<Project>();
          IMongoQuery projectQuery = Query<Project>.In(p => p.Id, projectKeys);
 
-         var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-         stopwatch.Start();
+         stopwatch.Restart();
          var aggResult = userCollection.Aggregate(new AggregateArgs
          {
             Pipeline = new BsonDocument[]
@@ -232,7 +221,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
             OutputMode = AggregateOutputMode.Inline,
          });
          stopwatch.Stop();
-         var executionTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+         var executionTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
          return executionTime;
       }
 

@@ -21,6 +21,16 @@ namespace Experiment.PartI.Normalized.App.Shared
       {
          switch (testCase)
          {
+            case TestCaseEnums.Initialize:
+               return new RunConfiguration
+               {
+                  NumberOfSelects = 1,
+                  NumberOfUpdates = 1,
+                  TotalNumberOfDepartments = 1,
+                  TotalNumberOfUsers = 1,
+                  TotalNumberOfProjects = 1,
+                  TestCase = testCase,
+               };
             case TestCaseEnums.TestCase1:
                return new RunConfiguration
                {

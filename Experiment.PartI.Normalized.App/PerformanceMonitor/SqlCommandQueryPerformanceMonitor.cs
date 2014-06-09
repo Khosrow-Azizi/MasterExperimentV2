@@ -31,12 +31,11 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                command.Parameters.AddWithValue("@id", department.Id);
                command.Parameters.AddWithValue("@name", department.Name);
                command.Parameters.AddWithValue("@dateAdd", department.DateAdded);
-
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               
+               stopwatch.Restart();
                command.ExecuteNonQuery();
                stopwatch.Stop();
-               execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+               execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
             }
             sqlConnection.Close();
          }
@@ -74,11 +73,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                sb.Append(string.Join(", ", paramTuples));
                command.CommandText = sb.ToString();
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                command.ExecuteNonQuery();
                stopwatch.Stop();
-               execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+               execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
             }
             sqlConnection.Close();
          }
@@ -103,11 +101,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                command.Parameters.AddWithValue("@ag", user.Age);
                command.Parameters.AddWithValue("@depId", user.DepartmentId);
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                command.ExecuteNonQuery();
                stopwatch.Stop();
-               execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+               execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
             }
             sqlConnection.Close();
          }
@@ -140,11 +137,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                sb.Append(string.Join(", ", paramIndexes) + ")");
                command.CommandText = sb.ToString();
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                command.ExecuteNonQuery();
                stopwatch.Stop();
-               execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+               execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
             }
             sqlConnection.Close();
          }
@@ -175,11 +171,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                sb.Append(string.Join(", ", paramNames) + ")");
                command.CommandText = sb.ToString();
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                command.ExecuteNonQuery();
                stopwatch.Stop();
-               execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+               execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
             }
             sqlConnection.Close();
          }
@@ -200,11 +195,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                command.Parameters.AddWithValue("@newLastName", newLastName);
                command.Parameters.AddWithValue("@firstNamePattern", firstNamePattern);
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                command.ExecuteNonQuery();
                stopwatch.Stop();
-               execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+               execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
             }
             sqlConnection.Close();
          }
@@ -224,11 +218,10 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                command.CommandText = "SELECT Id, Name, DateAdded FROM [dbo].[Department] WHERE Id = @id";
                command.Parameters.AddWithValue("@id", key);
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                command.ExecuteNonQuery();
                stopwatch.Stop();
-               execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+               execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
             }
             sqlConnection.Close();
          }
@@ -247,9 +240,8 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                command.CommandType = CommandType.Text;
                command.CommandText = "SELECT Id, FirstName, LastName, Age, DepartmentId, DateAdded FROM [dbo].[User] WHERE Id = @id";
                command.Parameters.AddWithValue("@id", key);
-
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+             
+               stopwatch.Restart();
                using (SqlDataReader rdr = command.ExecuteReader())
                {
                   if (rdr.HasRows)
@@ -268,7 +260,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                      }
                   }
                   stopwatch.Stop();
-                  execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+                  execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
                   rdr.Close();
                }
             }
@@ -290,8 +282,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                command.CommandText = "SELECT Id, Name, DateAdded FROM [dbo].[Department] WHERE Name LIKE @name";
                command.Parameters.AddWithValue("@name", name);
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                using (SqlDataReader rdr = command.ExecuteReader())
                {
                   if (rdr.HasRows)
@@ -307,7 +298,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                      }
                   }
                   stopwatch.Stop();
-                  execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+                  execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
                   rdr.Close();
                }
             }
@@ -330,8 +321,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                command.CommandText = "SELECT Id, FirstName, LastName, Age, DepartmentId, DateAdded FROM [dbo].[User] WHERE FirstName LIKE @firstName";
                command.Parameters.AddWithValue("@firstName", firstName);
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                using (SqlDataReader rdr = command.ExecuteReader())
                {
                   if (rdr.HasRows)
@@ -350,7 +340,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                      }
                   }
                   stopwatch.Stop();
-                  execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+                  execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
                   rdr.Close();
                }
             }
@@ -377,8 +367,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                command.CommandText = sb.ToString();
                command.Parameters.AddWithValue("@userFirstName", userFirstName);
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                using (SqlDataReader rdr = command.ExecuteReader())
                {
                   if (rdr.HasRows)
@@ -394,7 +383,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                      }
                   }
                   stopwatch.Stop();
-                  execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+                  execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
                   rdr.Close();
                }
             }
@@ -432,8 +421,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                sb.Append(string.Join(", ", paramNames) + ")");
                command.CommandText = sb.ToString();
 
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+               stopwatch.Restart();
                using (SqlDataReader rdr = command.ExecuteReader())
                {
                   if (rdr.HasRows)
@@ -452,7 +440,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                      }
                   }
                   stopwatch.Stop();
-                  execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+                  execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
                   rdr.Close();
                }
             }
@@ -488,9 +476,8 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                }
                sb.Append(string.Join(", ", paramNames) + ")");
                command.CommandText = sb.ToString();
-
-               var initialTime = stopwatch.Elapsed.TotalMilliseconds;
-               stopwatch.Start();
+             
+               stopwatch.Restart();
                using (SqlDataReader rdr = command.ExecuteReader())
                {
                   if (rdr.HasRows)
@@ -501,7 +488,7 @@ namespace Experiment.PartI.Normalized.App.PerformanceMonitor
                      }
                   }
                   stopwatch.Stop();
-                  execTime = stopwatch.Elapsed.TotalMilliseconds - initialTime;
+                  execTime = ((double)stopwatch.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency) * 1000;
                   rdr.Close();
                }
             }
