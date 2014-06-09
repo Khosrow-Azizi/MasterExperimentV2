@@ -1,6 +1,7 @@
 ﻿
 public enum DataBaseTypeEnums
-{  
+{
+   UnitTest = -1,
    SqlServerWithCommandQuery = 1,
    MongoDbNormalizedWriteAck = 2,
    SqlServerWithTextQuery = 3,
@@ -25,6 +26,7 @@ public enum TestCaseEnums
 
 public enum TestScenarioEnums
 {
+   UnitTest = -1,
    InsertDepartment = 1,
    InsertProject = 2,
    InsertUser = 3,

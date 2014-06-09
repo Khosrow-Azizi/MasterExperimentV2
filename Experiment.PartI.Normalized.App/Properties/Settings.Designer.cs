@@ -25,7 +25,7 @@ namespace Experiment.PartI.Normalized.App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool RunLocal {
             get {
                 return ((bool)(this["RunLocal"]));

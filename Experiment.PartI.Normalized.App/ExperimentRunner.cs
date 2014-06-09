@@ -25,18 +25,24 @@ namespace Experiment.PartI.Normalized.App
          thread.ProcessorAffinity = (IntPtr)2;
 
          ExperimentRunner expRunner = null;
-         bool waitForUser = true;        
+         bool waitForUser = true;
          while (waitForUser)
          {
             Console.WriteLine("Which part of the Experiment would you like to run?");
             Console.WriteLine("     Press 1 for SQL Server with COMMAND query");
             Console.WriteLine("     Press 2 for MongoDB with Acknowledged writes option");
             Console.WriteLine("     Press 6 to stop the program");
-            
+
             int answer;
             int.TryParse(Console.ReadLine(), out answer);
             switch (answer)
-            {               
+            {
+               case -1:
+                  {
+                     expRunner = new ExperimentRunner(DataBaseTypeEnums.UnitTest);
+                     waitForUser = false;
+                  }
+                  break;
                case 1:
                   {
                      expRunner = new ExperimentRunner(DataBaseTypeEnums.SqlServerWithCommandQuery);
@@ -48,9 +54,9 @@ namespace Experiment.PartI.Normalized.App
                      expRunner = new ExperimentRunner(DataBaseTypeEnums.MongoDbNormalizedWriteAck);
                      waitForUser = false;
                   }
-                  break;              
+                  break;
                case 6:
-                  waitForUser = false;                  
+                  waitForUser = false;
                   break;
                default:
                   Console.Beep();
@@ -78,6 +84,7 @@ namespace Experiment.PartI.Normalized.App
       {
          switch (databaseType)
          {
+            case DataBaseTypeEnums.UnitTest:
             case DataBaseTypeEnums.SqlServerWithCommandQuery:
                {
                   this.dbPerformanceMonitor = new SqlCommandParamQueryPerformanceMonitor(Configuration.SqlConnectionString);
@@ -91,7 +98,8 @@ namespace Experiment.PartI.Normalized.App
                }
                break;
             default:
-               throw new ArgumentException("There is no performance monitor for the given database type.");
+               Console.WriteLine("There is no performance monitor for the given database type.");
+               return;
          }
 
          this.databaseType = databaseType;
@@ -124,79 +132,49 @@ namespace Experiment.PartI.Normalized.App
       {
          Console.WriteLine(string.Format("Test case '{0}' has started..", testCase.ToString()));
          RunConfiguration config = RunConfiguration.GetConfigurations(testCase);
-       
+
          stopwatch.Reset();
          results.Clear();
          if (!RunInserts(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded.");
          Thread.Sleep(2000);
-         //results.Clear();
+
          if (!RunUpdateDepartmentName(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded.");
          Thread.Sleep(2000);
-        // results.Clear();
+
          if (!RunUpdateUserLastName(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded.");
          Thread.Sleep(2000);
-       //  results.Clear();
+
          if (!RunUpdateProjectName(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded.");
          Thread.Sleep(2000);
-         //results.Clear();
+
          if (!RunSelectDepartmentByKey(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded.");
          Thread.Sleep(2000);
-         //results.Clear();
+
          if (!RunSelectDepartmentByRandomName(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded."); 
          Thread.Sleep(2000);
-         //results.Clear();
+
          if (!RunSelectUserByKey(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded."); 
          Thread.Sleep(2000);
-         //results.Clear();
+
          if (!RunSelectUserByRandomFirstName(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded.");  
          Thread.Sleep(2000);
-         //results.Clear();
+
          if (!RunSelectDepartmentByRandomUser(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded."); 
          Thread.Sleep(2000);
-         //results.Clear();
+
          if (!RunSelectUserByRandomProject(config, stopwatch, results))
             return;
-         //Console.WriteLine("Saving result data in the database..");
-         //recorder.Record(results);
-         //Console.WriteLine("Saving result data succeeded."); 
          Thread.Sleep(2000);
-         //results.Clear();
+
          if (!RunSelectAvgUserAgeByProjects(config, stopwatch, results))
             return;
          Console.WriteLine("Saving result data in the database..");
@@ -240,7 +218,7 @@ namespace Experiment.PartI.Normalized.App
                   Name = DepartmentNamePrefix + (++namePostfix),
                   DateAdded = DateTime.Now,
                };
-               
+
                resultsTobeRecorded.Add(new PerformanceResult
                {
                   ExecutionTime = dbPerformanceMonitor.Insert(department, sw),
@@ -478,7 +456,7 @@ namespace Experiment.PartI.Normalized.App
          return true;
       }
 
-      private bool RunSelectUserByKey(RunConfiguration config, Stopwatch sw,  List<PerformanceResult> resultsTobeRecorded)
+      private bool RunSelectUserByKey(RunConfiguration config, Stopwatch sw, List<PerformanceResult> resultsTobeRecorded)
       {
          Console.WriteLine(string.Format("Select tests with scenario '{0}' has started..",
          TestScenarioEnums.SelectUserByKey.ToString()));
@@ -630,7 +608,7 @@ namespace Experiment.PartI.Normalized.App
       private void SaveRandomData()
       {
          Console.WriteLine("Saving the random data..");
-       
+
          using (SqlConnection sqlConnection = new SqlConnection(Configuration.ResultDbSqlConnectionString))
          {
             var query = "Delete [dbo].[PartIRandomData]";
@@ -718,7 +696,7 @@ namespace Experiment.PartI.Normalized.App
          {
             Console.WriteLine("Failed to flush the database. Error: " + ex.Message);
             return false;
-         }  
+         }
       }
 
       private static List<string> randomUserFirstNames;

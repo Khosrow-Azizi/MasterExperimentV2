@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -35,24 +36,75 @@ namespace Experiment.PartI.Normalized.App.DataRecorder
 
       public void Record(IEnumerable<PerformanceResult> performanceResults)
       {
+         int testNumber = 0;
          using (var ctx = new Entities())
          {
-            int testNumber = GenerateNewTestNumber(ctx, performanceResults.First());
-            foreach (var result in performanceResults)
-            {
-               ctx.PartIResult.Add(new PartIResult
-               {
-                  TestNumber = testNumber,
-                  DataBaseType = (int)dataBaseType,
-                  DateTimeAdded = DateTime.Now,
-                  TestCase = (int)result.TestCase,
-                  TestScenario = (int)result.TestScenario,
-                  ExecutionTime = result.ExecutionTime,
-               });
-               testNumber++;
-            }
-            ctx.SaveChanges();
+            testNumber = GenerateNewTestNumber(ctx, performanceResults.First());
          }
+
+         var bundles = GetInsertBundles(performanceResults.ToArray());
+         using (SqlConnection sqlConnection = new SqlConnection(Configuration.ResultDbSqlConnectionString))
+         {
+            sqlConnection.Open();
+            foreach (var bundle in bundles)
+            {
+               using (SqlCommand command = new SqlCommand())
+               {
+                  StringBuilder sb = new StringBuilder();
+                  sb.Append("INSERT INTO [dbo].[PartIResult] (TestNumber, DataBaseType, DateTimeAdded, TestCase, TestScenario, ExecutionTime) VALUES ");
+                  int paramNumber = 0;
+                  List<string> paramTuples = new List<string>();
+                  foreach (var result in bundle)
+                  {
+                     string p0 = "@p0" + paramNumber;
+                     string p1 = "@p1" + paramNumber;
+                     string p2 = "@p2" + paramNumber;
+                     string p3 = "@p3" + paramNumber;
+                     string p4 = "@p4" + paramNumber;
+                     string p5 = "@p5" + paramNumber;
+                     paramTuples.Add(string.Format("({0},{1},{2},{3},{4},{5})", p0, p1, p2, p3, p4, p5));
+                     command.Parameters.AddWithValue(p0, testNumber);
+                     command.Parameters.AddWithValue(p1, (int)dataBaseType);
+                     command.Parameters.AddWithValue(p2, DateTime.Now);
+                     command.Parameters.AddWithValue(p3, (int)result.TestCase);
+                     command.Parameters.AddWithValue(p4, (int)result.TestScenario);
+                     command.Parameters.AddWithValue(p5, result.ExecutionTime);
+                     paramNumber++;
+                     testNumber++;
+                  }
+                  sb.Append(string.Join(", ", paramTuples));
+                  command.CommandText = sb.ToString();
+                  command.Connection = sqlConnection;
+                  command.ExecuteNonQuery();
+               }
+            }
+            sqlConnection.Close();
+         }
+      }
+
+      private const int MaxAllowedSqlParameters = 2000;
+      private List<PerformanceResult[]> GetInsertBundles(PerformanceResult[] performanceResults)
+      {
+         long totalCount = performanceResults.LongCount();
+         var maxAmountAllowed = MaxAllowedSqlParameters / 6;
+         List<PerformanceResult[]> bundles = new List<PerformanceResult[]>();
+         if (totalCount > maxAmountAllowed)
+         {
+            long numberOfBundles = totalCount / maxAmountAllowed;
+            int numberOfItemsBundled = 0;
+            for (int i = 0; i < numberOfBundles; i++)
+            {
+               bundles.Add(performanceResults.Skip(i * maxAmountAllowed).Take(maxAmountAllowed).ToArray());
+               numberOfItemsBundled += maxAmountAllowed;
+            }
+            if (numberOfItemsBundled < totalCount)
+               bundles.Add(performanceResults.Skip(numberOfItemsBundled).Take(MaxAllowedSqlParameters).ToArray());
+         }
+         else
+         {
+            bundles.Add(performanceResults);
+         }
+         return bundles;
       }
 
       public PartIResult GetLatestResult(TestCaseEnums testCase, TestScenarioEnums scenario)
