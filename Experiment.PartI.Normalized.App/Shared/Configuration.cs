@@ -53,8 +53,10 @@ namespace Experiment.PartI.Normalized.App.Shared
                   DataSource = Settings.Default.RunLocal ?
                   @Settings.Default.LocalResultDataSource :
                   @Settings.Default.RemoteResultDataSource,
-                  IntegratedSecurity = true,
-                  PersistSecurityInfo = false,
+                  IntegratedSecurity = Settings.Default.RunLocal ? true : false,
+                  PersistSecurityInfo = Settings.Default.RunLocal ?  false : true,
+                  UserID = "MasterExperiment",
+                  Password = "master",
                }.ConnectionString
             }.ConnectionString;
          }
@@ -70,8 +72,10 @@ namespace Experiment.PartI.Normalized.App.Shared
                  DataSource = Settings.Default.RunLocal ?
                  @Settings.Default.LocalResultDataSource :
                  @Settings.Default.RemoteResultDataSource,
-                 IntegratedSecurity = true,
-                 PersistSecurityInfo = false,
+                 IntegratedSecurity = Settings.Default.RunLocal ? true : false,
+                 PersistSecurityInfo = Settings.Default.RunLocal ? false : true,
+                 UserID = "MasterExperiment",
+                 Password = "master",
               }.ConnectionString;
          }
       }

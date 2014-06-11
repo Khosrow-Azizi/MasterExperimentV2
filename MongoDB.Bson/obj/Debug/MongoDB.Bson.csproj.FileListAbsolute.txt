@@ -15,3 +15,4 @@ C:\Users\khosrow azizi\workspace\MasterExperimentV2\MongoDB.Bson\bin\Debug\Mongo
 C:\Users\khosrow azizi\workspace\MasterExperimentV2\MongoDB.Bson\bin\Debug\MongoDB.Bson.pdb
 C:\Users\khosrow azizi\workspace\MasterExperimentV2\MongoDB.Bson\obj\Debug\MongoDB.Bson.dll
 C:\Users\khosrow azizi\workspace\MasterExperimentV2\MongoDB.Bson\obj\Debug\MongoDB.Bson.pdb
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\MongoDB.Bson\obj\Debug\MongoDB.Bson.csprojResolveAssemblyReference.cache

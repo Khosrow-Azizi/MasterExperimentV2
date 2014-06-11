@@ -25,7 +25,7 @@ namespace Experiment.PartI.Normalized.App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool RunLocal {
             get {
                 return ((bool)(this["RunLocal"]));
@@ -65,21 +65,11 @@ namespace Experiment.PartI.Normalized.App.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=win2012sql2012;Initial Catalog=MasterExperimentPartI;User=MasterExper" +
-            "iment;Password=master;Persist Security Info=True;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KHOSROW\\SQLEXPRESS;Initial Catalog=MasterExperimentPartI;User=MasterE" +
+            "xperiment;Password=master;Persist Security Info=True;")]
         public string RemoteSqlConnectionString {
             get {
                 return ((string)(this["RemoteSqlConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("mongodb://win2012mongodb")]
-        public string RemoteMongoConnectionString {
-            get {
-                return ((string)(this["RemoteMongoConnectionString"]));
             }
         }
         
@@ -94,7 +84,7 @@ namespace Experiment.PartI.Normalized.App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        [global::System.Configuration.DefaultSettingValueAttribute("win2008sql2008")]
         public string RemoteResultDataSource {
             get {
                 return ((string)(this["RemoteResultDataSource"]));
@@ -107,6 +97,16 @@ namespace Experiment.PartI.Normalized.App.Properties {
         public string ResultDatabaseName {
             get {
                 return ((string)(this["ResultDatabaseName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("mongodb://khosrow")]
+        public string RemoteMongoConnectionString {
+            get {
+                return ((string)(this["RemoteMongoConnectionString"]));
             }
         }
     }

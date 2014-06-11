@@ -136,44 +136,34 @@ namespace Experiment.PartI.Normalized.App
          stopwatch.Reset();
          results.Clear();
          if (!RunInserts(config, stopwatch, results))
-            return;
-         Thread.Sleep(2000);
+            return;        
 
          if (!RunUpdateDepartmentName(config, stopwatch, results))
-            return;
-         Thread.Sleep(2000);
+            return;        
 
          if (!RunUpdateUserLastName(config, stopwatch, results))
             return;
-         Thread.Sleep(2000);
 
          if (!RunUpdateProjectName(config, stopwatch, results))
             return;
-         Thread.Sleep(2000);
 
          if (!RunSelectDepartmentByKey(config, stopwatch, results))
             return;
-         Thread.Sleep(2000);
 
          if (!RunSelectDepartmentByRandomName(config, stopwatch, results))
             return;
-         Thread.Sleep(2000);
 
          if (!RunSelectUserByKey(config, stopwatch, results))
             return;
-         Thread.Sleep(2000);
 
          if (!RunSelectUserByRandomFirstName(config, stopwatch, results))
             return;
-         Thread.Sleep(2000);
 
          if (!RunSelectDepartmentByRandomUser(config, stopwatch, results))
             return;
-         Thread.Sleep(2000);
 
          if (!RunSelectUserByRandomProject(config, stopwatch, results))
             return;
-         Thread.Sleep(2000);
 
          if (!RunSelectAvgUserAgeByProjects(config, stopwatch, results))
             return;
@@ -549,9 +539,14 @@ namespace Experiment.PartI.Normalized.App
                projectKeys = new HashSet<int>();
                if (RandomProjectIds.Count <= i)
                {
-                  // get three random projects
-                  while (projectKeys.Count < 3)
+                  if (config.TestCase == TestCaseEnums.Initialize)
                      projectKeys.Add(dbManager.GetRandomKey<Project>());
+                  else
+                  {
+                     // get three random projects
+                     while (projectKeys.Count < 3)
+                        projectKeys.Add(dbManager.GetRandomKey<Project>());
+                  }
                   RandomProjectIds.Add(i, projectKeys.ToArray());
                }
                resultsTobeRecorded.Add(new PerformanceResult

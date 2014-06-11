@@ -1,0 +1,15 @@
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\Experiment.PartI.Normalized.SimpleTester.exe.config
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\Experiment.PartI.Normalized.SimpleTester.exe
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\Experiment.PartI.Normalized.SimpleTester.pdb
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\Experiment.PartI.Normalized.App.exe
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\EntityFramework.dll
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\MongoDB.Driver.dll
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\MongoDB.Bson.dll
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\EntityFramework.xml
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\MongoDB.Driver.pdb
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\MongoDB.Driver.xml
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\MongoDB.Bson.pdb
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\bin\Release\MongoDB.Bson.xml
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\obj\Release\Experiment.PartI.Normalized.SimpleTester.csprojResolveAssemblyReference.cache
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\obj\Release\Experiment.PartI.Normalized.SimpleTester.exe
+C:\Users\khosrow azizi\workspace\MasterExperimentV2\Experiment.PartI.Normalized.SimpleTester\obj\Release\Experiment.PartI.Normalized.SimpleTester.pdb
